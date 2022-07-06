@@ -1,2 +1,0 @@
-Auto 1 Audi_A3_Sedan 230 AT FWD Classic 0 Grey 4495 1425 1370
-Auto 2 Audi_A5_Coupe 420 AT FWD Premium 0 Green 4697 1371 1530
