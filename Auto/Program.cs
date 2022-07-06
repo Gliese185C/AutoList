@@ -1,6 +1,6 @@
 ﻿using Auto;
 
-string path = "C:\\Users\\JonyHowman\\RiderProjects\\Auto\\Auto\\Catalog.txt";
+string path = "C:\\Users\\JonyHowman\\Desktop\\Test\\AutoList\\Auto\\Catalog.txt";
 List<Machine> Auto_list = new List<Machine>();
 string message = "You can change next information of this item: \n" +
                  "[ 1 ] Name\n" +
@@ -116,25 +116,95 @@ while (application)
                     select items;
                 if (list.Count() > 1)
                 {
+                    bool sec3_3 = true;
+                    int index = 0;
                     Console.WriteLine("Several objects were found according to your request: ");
+                    bool l120 = true;
+                    while (l120) {
                     int i = 1;
                     foreach (Machine elements in list)
                     {
                         Console.WriteLine($"[ {i} ] {elements.name}");
                         i++;
                     }
-
-                    int index = Convert.ToInt32(Console.ReadLine());
-                    bool sec3_3 = true;
+                    Console.WriteLine($"[ {i} ] Back");
+                    Console.Write("|:::=>| ");
+                    try
+                    {
+                        index = Convert.ToInt32(Console.ReadLine());
+                        if (index <= i)
+                        {
+                            if (index == i)
+                            {
+                                l120 = false;
+                                sec3_3 = false;
+                            }
+                            else{
+                            l120 = false;
+                            sec3_3 = true;
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Incorrect data input");
+                        }
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Incorrect data input");
+                        sec3_3 = false;
+                    }
+                    }
                     while (sec3_3)
                     {
-                        Console.WriteLine(message);
-                        Console.Write("|:::=>| ");
-                        string tmp = Console.ReadLine();
+                        bool l160 = true;
+                        int tmp = 0;
+                        while (l160)
+                        {
+                            Console.WriteLine(message);
+                            Console.WriteLine("[ 11 ] Back");
+                            Console.Write("|:::=>| ");
+                            
+                            try
+                            {
+                                tmp = Convert.ToInt32(Console.ReadLine());
+                                if (tmp > 11 || tmp <= 0)
+                                {
+                                    Console.WriteLine("Incorrect data input");
+                                }
+                                else
+                                {
+                                    if (tmp == 11)
+                                    {
+                                        l160 = false;
+                                        sec3_3 = false;
+                                    }
+                                    else
+                                    {
+                                        l160 = false;
+                                    }
+                                }
+                                
+                            }
+                            catch
+                            {
+                                Console.WriteLine("Incorrect data input");
+                            }
+                        }
+
+                        if (sec3_3 == false)
+                        {
+                            break;
+                        }
                         Console.WriteLine("Enter new information");
                         Console.Write("|:::=>| ");
                         string info = Console.ReadLine();
-                        list.ElementAt(index).ChangeInfo(tmp, info);
+                        string problem = list.ElementAt(index).ChangeInfo(Convert.ToString(tmp), info);
+                        if (problem == "1")
+                        {
+                            Console.WriteLine("The entered information does not correspond to this parameter\n" +
+                                              "The information was not saved");
+                        }
                         Console.WriteLine(
                             "[ 1 ] Back     [ 2 ] General menu      [ 3 ] Change over information of this item      [ 4 ] Change information another item");
                         Console.Write("|[1-4]<=::::| ");
@@ -156,35 +226,98 @@ while (application)
                 }
                 else if (list.Count() == 1)
                 {
-                    Console.WriteLine(message);
-                    Console.Write("|:::=>| ");
-                    string tmp = Console.ReadLine();
-                    Console.WriteLine("Enter new information");
-                    Console.Write("|:::=>| ");
-                    string info = Console.ReadLine();
-                    foreach (Machine elements in list)
+                    bool l224 = true;
+                    int tmpt = 0;
+                    while (l224)
                     {
-                        string problem = elements.ChangeInfo(tmp, info);
-                        if (problem == "1")
+                        bool l228 = true;
+                        while (l228)
                         {
-                            Console.WriteLine("The entered information does not correspond to this parameter\n" +
-                                              "The information was not saved");
+                            Console.WriteLine(message);
+                            Console.WriteLine("[ 11 ] Back");
+                            Console.Write("|:::=>| ");
+                            try
+                            {
+                                tmpt = Convert.ToInt32(Console.ReadLine());
+                                if (tmpt > 11 || tmpt <= 0)
+                                {
+                                    Console.WriteLine("Incorrect data input");
+                                }
+                                else
+                                {
+                                    if (tmpt == 11)
+                                    {
+                                        l228 = false;
+                                        l224 = false;
+                                    }
+                                    else
+                                    {
+                                        l228 = false;
+                                    }
+                                }
+
+                            }
+                            catch
+                            {
+                                Console.WriteLine("Incorrect data input");
+                            }
+                        }
+
+                        if (l224 == false)
+                        {
+                            break;
+                        }
+                        Console.WriteLine("Enter new information");
+                        Console.Write("|:::=>| ");
+                        string info = Console.ReadLine();
+                        foreach (Machine elements in list)
+                        {
+                            string problem = elements.ChangeInfo(Convert.ToString(tmpt), info);
+                            if (problem == "1")
+                            {
+                                Console.WriteLine("The entered information does not correspond to this parameter\n" +
+                                                  "The information was not saved");
+                            }
                         }
                     }
                 }
                 else
                 {
+                    bool l201 = true;
+                    while (l201)
+                    {
                     Console.WriteLine(
                         "Nothing was found, you may have entered incorrect data or such an item does not exist");
+                    Console.WriteLine("[ 1 ] Back     [ 2 ] General menu     [ 3 ] Again");
+                    string exit_return = Console.ReadLine();
+                    
+                    
+                        if (exit_return == "1" || exit_return == "2")
+                        {
+                            l201 = false;
+                            sec3 = false;
+                        }
+                        else if (exit_return == "3")
+                        {
+                            l201 = false;
+                            
+                        }
+                        else
+                        {
+                            Console.WriteLine("Incorrect data input");
+                        }
+                    }
                 }
 
 
             }
 
             break;
+        case "4":
+            break;
         default:
             break;
-
+        
 
     }
 }
