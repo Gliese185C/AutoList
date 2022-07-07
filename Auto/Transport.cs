@@ -1,4 +1,5 @@
 using System.Drawing;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 
 namespace Auto;
@@ -6,10 +7,10 @@ namespace Auto;
 abstract public class Transport
 {
     protected string TT;
-    private double Width;
-    private double Height;
-    private double Weight;
-    private double Power;
+    private string Width;
+    private string Height;
+    private string Weight;
+    private string Power;
     private string Type;
     private string Color;
 
@@ -42,21 +43,51 @@ abstract public class Transport
         get { return Color; }
         set { Color = value; }
     }
-    public double width
+    public string width
     {
         get { return Width;}
         set
         {
-            if (value > 0) Width = value;
+            try
+            {
+                if (Convert.ToDouble(value) < 0 )
+                {
+                    Width = "-";
+                }
+                else
+                {
+                    Width = value;
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Width was entered incorrectly, not saved, needs to be changed");
+                Width = "-";
+            }
         }
     }
 
-    public double height
+    public string height
     {
         get { return Height; }
         set
         {
-            if (value > 0) Height = value;
+            try
+            {
+                if (Convert.ToDouble(value) < 0 )
+                {
+                    Height = "-";
+                }
+                else
+                {
+                    Height = value;
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Height was entered incorrectly, not saved, needs to be changed");
+                Height = "-";
+            }
         }
     }
 
@@ -69,22 +100,52 @@ abstract public class Transport
         }
     }
 
-    public double weight
+    public string weight
     {
         get { return Weight; }
         set
         {
-            if (value > 0) Weight = value;
+            try
+            {
+                if (Convert.ToDouble(value) < 0 )
+                {
+                    Weight = "-";
+                }
+                else
+                {
+                    Weight = value;
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Weight was entered incorrectly, not saved, needs to be changed");
+                Weight = "-";
+            }
         }
     }
 
-    public double power
+    public string power
     {
         
         get { return Power; }
         set
         {
-            if (value > 0) Power = value;
+            try
+            {
+                if (Convert.ToDouble(value) < 0 )
+                {
+                    Power = "-";
+                }
+                else
+                {
+                    Power = value;
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Power was entered incorrectly, not saved, needs to be changed");
+                Power = "-";
+            }
         }
     }
 }
@@ -94,8 +155,11 @@ public class Machine : Transport
     public static string lastID;
     private string Transmission;
     private string Equipment;
-    private double Mileage;
+    private string Mileage;
     private string Actuator;
+
+    protected string[] add_n = {"Name: ", "Power: ", "Transmission: ","Actuator: ", "Equipment: ", "Mileage: ","Color: ", "Width: ","Height: ", "Weight: "};
+    
     /*public Machine(string name, double width, double height, double weight, double power,string dt, string equ) : base(name, width, height,
         weight, power)
     {
@@ -107,18 +171,26 @@ public class Machine : Transport
     {
         get { return lastID; }
     }
-    public double mileage
+    public string mileage
     {
         get { return Mileage; }
         set
         {
-            if (value >= 0)
+            try
             {
-                Mileage = value;
+                if (Convert.ToDouble(value) < 0 )
+                {
+                    Mileage = "-";
+                }
+                else
+                {
+                    Mileage = value;
+                }
             }
-            else
+            catch
             {
-                Console.WriteLine("Error, incorrect input data");
+                Console.WriteLine("Mileage was entered incorrectly, not saved, needs to be changed");
+                Mileage = "-";
             }
         }
     }
@@ -132,7 +204,8 @@ public class Machine : Transport
             }
             else
             {
-                Console.WriteLine("Error, incorrect data input");
+                Console.WriteLine("Actuator was entered incorrectly, not saved, needs to be changed");
+                Actuator = "-";
             }
         }
     }
@@ -147,7 +220,8 @@ public class Machine : Transport
             }
             else
             {
-                Console.WriteLine("Error, incorrect data input");
+                Console.WriteLine("Transmission was entered incorrectly, not saved, needs to be changed");
+                Transmission = "-";
             }
         }
     }
@@ -164,7 +238,8 @@ public class Machine : Transport
             }
             else
             {
-                Console.WriteLine("Error, incorrect data input");
+                Console.WriteLine("Equipment was entered incorrectly, not saved, needs to be changed");
+                Equipment = "-";
             }
         }
     }
@@ -173,16 +248,17 @@ public class Machine : Transport
     {
         this.type = data[0];
         this.id = data[1];
-        this.name = data[2];
-        this.power = Convert.ToDouble(data[3]);
+        this.name = data[2].Replace(" ","_");
+        this.power = data[3];
         this.transmission = data[4];
         this.actuator = data[5];
         this.equipment = data[6];
-        this.mileage = Convert.ToDouble(data[7]);
+        this.mileage = data[7];
         this.color = data[8];
-        this.width = Convert.ToDouble(data[9]);
-        this.height = Convert.ToDouble(data[10]);
-        this.weight = Convert.ToDouble(data[11]);
+        this.width = data[9];
+        this.height = data[10];
+        this.weight = data[11];
+        
         lastID = this.id;
     }
 
@@ -211,14 +287,7 @@ public class Machine : Transport
                 this.name = data;
                 break;
             case "2":
-                try
-                {
-                    this.power = Convert.ToDouble(data);
-                }
-                catch
-                {
-                    return "1";
-                }
+                this.power = data;
                 break;
             case "3":
                 this.transmission = data;
@@ -230,52 +299,37 @@ public class Machine : Transport
                 this.equipment = data;
                 break;
             case "6":
-                try
-                {
-                    this.mileage = Convert.ToDouble(data);
-                }
-                catch
-                {
-                    return "1";
-                }
+                this.mileage = data;
                 break;
             case "7":
                 this.color = data;
                 break;
             case "8":
-                try
-                {
-                    this.width = Convert.ToDouble(data);
-                }
-                catch
-                {
-                    return "1";
-                }
+                this.width = data;
                 break;
             case "9":
-                try
-                {
-                    this.height = Convert.ToDouble(data);
-                }
-                catch
-                {
-                    return "1";
-                }
+                this.height = data;
                 break;
             case "10":
-                try
-                {
-                    this.weight = Convert.ToDouble(data);
-                }
-                catch
-                {
-                    return "1";
-                }
+                this.weight = data;
                 break;
             default:
                 break;
         }
 
         return "0";
+    }
+
+    public void add_new()
+    {
+        string[] data = new string[12];
+        data[0] = "Auto";
+        data[1] = Convert.ToString(Convert.ToInt32(lastID) + 1);
+        for (int i = 0; i < add_n.Length; i++)
+        {
+            Console.Write(add_n[i]);
+            data[i+2]=(Console.ReadLine());
+        }
+        CompleteData(data);
     }
 }

@@ -34,9 +34,10 @@ while (application)
     Console.WriteLine("General Menu:\n" +
                       "[ 1 ] Show the list of items|\n" +
                       "[ 2 ] Show item info by id  |\n" +
-                      "[ 3 ] Edit item info        |\n");
+                      "[ 3 ] Edit item info        |\n" +
+                      "[ 4 ] Add new item          |\n");
 
-
+    Console.Write("|:::=>| ");
     string key = Console.ReadLine();
     switch (key)
     {
@@ -314,6 +315,42 @@ while (application)
 
             break;
         case "4":
+            bool l318 = true;
+            while (l318)
+            {
+                Machine elemnt = new Machine();
+                elemnt.add_new();
+                Console.WriteLine("[ 1 ] Save and exit    [ 2 ] Re-enter the data     [ 3 ] Do not save and exit");
+                bool l324 = true;
+                while (l324)
+                {
+                    Console.Write("|[1-3]<=::::| ");
+                    string k327 = Console.ReadLine();
+                    if (k327 == "1")
+                    {
+                        Auto_list.Add(elemnt);
+                        Console.WriteLine("The item was successfully saved and added to the catalog");
+                        l324 = false;
+                        l318 = false;
+                    }
+                    else if (k327 == "2")
+                    {
+                        l324 = false;
+                    }
+                    else if (k327 == "3")
+                    {
+                        l318 = false;
+                        l324 = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Incorrect data input");
+                    }
+            }
+            }
+            break;
+        case "5":
+            
             break;
         default:
             break;
