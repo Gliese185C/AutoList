@@ -96,7 +96,7 @@ abstract public class Transport
         get { return TT; }
         set
         {
-            TT = value;
+            TT = value.Replace(" ","_");
         }
     }
 
@@ -279,7 +279,7 @@ public class Machine : Transport
         return info;
     }
 
-    public string ChangeInfo(string tmp,string data)
+    public void ChangeInfo(string tmp,string data)
     {
         switch (tmp)
         {
@@ -316,8 +316,6 @@ public class Machine : Transport
             default:
                 break;
         }
-
-        return "0";
     }
 
     public void add_new()

@@ -1,3 +1,4 @@
 Auto 1 Audi_A3_Sedan 230 AT FWD Classic 0 Grey 4495 1425 1370
-Auto 2 Audi_A5_Coupe 420 AT FWD Premium 0 Green 4697 1371 1530
-Auto 3 Audi_A3_Sedan 335 AT FWD Luxe 0 Magneta 4245 1390 1470
+Auto 2 Audi_A3_Sedan 555 AT FWD Luxe 0 Green 4697 1371 1530
+Auto 3 Audi_A5_Coupe 420 AT FWD Premium 0 Green 4697 1371 1530
+Auto 4 Audi_A3_Sedan 335 AT FWD Luxe 0 Magneta 4245 1390 1470
