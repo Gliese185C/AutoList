@@ -279,38 +279,38 @@ public class Machine : Transport
         return info;
     }
 
-    public void ChangeInfo(string tmp,string data)
+    public void ChangeInfo(int tmp,string data)
     {
         switch (tmp)
         {
-            case "1":
+            case 1:
                 this.name = data;
                 break;
-            case "2":
+            case 2:
                 this.power = data;
                 break;
-            case "3":
+            case 3:
                 this.transmission = data;
                 break;
-            case "4":
+            case 4:
                 this.actuator = data;
                 break;
-            case "5":
+            case 5:
                 this.equipment = data;
                 break;
-            case "6":
+            case 6:
                 this.mileage = data;
                 break;
-            case "7":
+            case 7:
                 this.color = data;
                 break;
-            case "8":
+            case 8:
                 this.width = data;
                 break;
-            case "9":
+            case 9:
                 this.height = data;
                 break;
-            case "10":
+            case 10:
                 this.weight = data;
                 break;
             default:

@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Linq.Expressions;
+using System.Net;
 using Auto;
 
 string path = "C:\\Users\\JonyHowman\\Desktop\\Test\\AutoList\\Auto\\Catalog.txt";
@@ -132,7 +133,6 @@ while (application)
                     list[g] = t;
                     g++;
                 }
-                Console.WriteLine("HELLO");
                 if (list2.Count() > 1)
                 {
                     bool sec3_3 = true;
@@ -182,7 +182,7 @@ while (application)
                         int tmp = 0;
                         while (l160)
                         {
-                            
+                            Console.Clear();
                             Console.WriteLine(message);
                             Console.WriteLine("[ 11 ] Back");
                             Console.Write("|:::=>| ");
@@ -223,14 +223,14 @@ while (application)
                         Console.Write("|:::=>| ");
                         string info = Console.ReadLine();
                         // this string delete my element in list2 why?????????
-                        list2.ElementAt(index-1).ChangeInfo(Convert.ToString(tmp), info);
-                        //list[index].ChangeInfo(Convert.ToString(tmp), info);
+                        //list2.ElementAt(index-1).ChangeInfo(Convert.ToString(tmp), info);
+                        list[index-1].ChangeInfo(tmp, info);
                         //if (problem == "1")
                         //{
                         //    Console.WriteLine("The entered information does not correspond to this parameter\n" +
                         //                      "The information was not saved");
                        // }
-                        
+                        Console.Clear();
                         Console.WriteLine("The information was successfully saved");
                         Console.WriteLine(
                             "[ 1 ] Back     [ 2 ] General menu      [ 3 ] Change over information of this item      [ 4 ] Change information another item");
@@ -260,6 +260,7 @@ while (application)
                         bool l228 = true;
                         while (l228)
                         {
+                            Console.Clear();
                             Console.WriteLine(message);
                             Console.WriteLine("[ 11 ] Back");
                             Console.Write("|:::=>| ");
@@ -299,7 +300,7 @@ while (application)
                         string info = Console.ReadLine();
                         foreach (Machine elements in list)
                         {
-                            elements.ChangeInfo(Convert.ToString(tmpt), info);
+                            elements.ChangeInfo(tmpt, info);
                         }
                     }
                 }
@@ -348,6 +349,7 @@ while (application)
                 {
                     Console.Write("|[1-3]<=::::| ");
                     string k327 = Console.ReadLine();
+                    Console.Clear();
                     if (k327 == "1")
                     {
                         Auto_list.Add(elemnt);
@@ -425,58 +427,95 @@ while (application)
 
                         break;
                     case "2":
-                        bool l405 = true;
-                        while (l405)
-                        {
-                            Console.Clear();
-                            int count = 1;
-                            foreach (Machine item in Auto_list)
-                            {
-                                Console.WriteLine($"[           {count}         ]");
-                                Console.WriteLine(item.showdata());
-                                count++;
-                            }
-                            bool l415 = true;
-                            while (l415)
-                            {
-                                Console.Write("[ 1 ] Back     [ 2 ] Delete item\n|[1-2]<==:::| ");
-                                string k419 = Console.ReadLine();
-                                if (k419 == "1")
+                         int count1 = 0;
+                         bool l431 = true;
+                         while (l431)
                                 {
-                                    l415 = false;
-                                    l405 = false;
-                                }
-                                else if (k419 == "2")
-                                {
-                                    bool l426 = true;
-                                    while (l426)
+                                    Console.Clear();
+                                    Console.WriteLine($"Count of items {Auto_list.Count()}");
+                                    if (Auto_list.Count() == 0)
                                     {
-                                        
-                                        Console.Write($"Enter the number of item in the list above\n|[1-{count-1}]<==:::| ");
-                                        string k430 = Console.ReadLine();
-                                        try
+                                        Console.WriteLine("The list is empty");
+                                        Console.Write("[ 1 ] Menu\n|[1]<==:::| ");
+                                        string k490 = Console.ReadLine();
+                                        if (k490 == "1")
                                         {
-                                            Auto_list.RemoveAt(Convert.ToInt32(k430)-1);
-                                            Console.WriteLine("The item was successfully deleted");
-                                            l426 = false;
-                                            l415 = false;
-                                        }
-                                        catch
-                                        {
-                                            Console.WriteLine("Incorrect data input");
-                                            Console.Write("[ 1 ] Back\n|[1-2]<==:::| ");
-                                            string k441 = Console.ReadLine();
-                                            if (k441 == "1")
-                                            {
-                                                l426 = false;
-                                                l415 = false;
-                                            }
+                                            l431 = false;
+
                                         }
                                     }
+                                    else
+                                    {
+                                        if (count1 == 0)
+                                        {
+                                            Console.WriteLine($"[           {count1 + 1}         ]");
+                                            Console.WriteLine(Auto_list[count1].showdata());
+                                            Console.Write(
+                                                "[ 1 ] Menu     [ 2 ] Next     [ 3 ] Delete this\n|[1-2]<==:::| ");
+                                            string k490 = Console.ReadLine();
+                                            if (k490 == "1")
+                                            {
+                                                l431 = false;
+                                            }
+                                            else if (k490 == "2")
+                                            {
+                                                count1++;
+                                            }
+                                            else if (k490 == "3")
+                                            {
+                                                Auto_list.RemoveAt(count1);
+                                            }
+                                            
+                                        }
+                                        else if (count1 < Auto_list.Count() - 1)
+                                        {
+                                            Console.WriteLine("The list items: ");
+                                            Console.WriteLine($"[           {count1 + 1}         ]");
+                                            Console.WriteLine(Auto_list[count1].showdata());
+                                            Console.Write(
+                                                "[ 1 ] Menu     [ 2 ] Back     [ 3 ] Next     [ 4 ] Delete this\n|[1-2]<==:::| ");
+                                            string k490 = Console.ReadLine();
+                                            if (k490 == "1")
+                                            {
+                                                l431 = false;
+                                            }
+                                            else if (k490 == "2")
+                                            {
+                                                count1--;
+                                            }
+                                            else if (k490 == "3")
+                                            {
+                                                count1++;
+                                            }
+                                            else if (k490 == "4")
+                                            {
+                                                Auto_list.RemoveAt(count1);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("The items list: ");
+                                            Console.WriteLine($"[           {count1 + 1}         ]");
+                                            Console.WriteLine(Auto_list[count1].showdata());
+                                            Console.Write(
+                                                "[ 1 ] Menu     [ 2 ] Back     [ 3 ] Delete this\n|[1-2]<==:::| ");
+                                            string k490 = Console.ReadLine();
+                                            if (k490 == "1")
+                                            {
+                                                l431 = false;
+                                            }
+                                            else if (k490 == "2")
+                                            {
+                                                count1--;
+                                            }
+                                            else if (k490 == "3")
+                                            {
+                                                Auto_list.RemoveAt(count1);
+                                                count1--;
+                                            }
+                                        } 
+                                    }
                                 }
-                                Console.Clear();
-                            } 
-                        }
                         break;
                     case "3":
                         bool l454 = true;
@@ -497,7 +536,7 @@ while (application)
                                 select item;
                             if (find_items.Count() > 0)
                             {
-                                int count = 0;
+                                
 
                                 //Machine[] items = new Machine[find_items.Count()];
                                 List<Machine> items = new List<Machine>();
@@ -508,7 +547,7 @@ while (application)
                                     items.Add(info);
 
                                 }
-
+                                int count = 0;
                                 bool l480 = true;
                                 while (l480)
                                 {
@@ -633,6 +672,40 @@ while (application)
                         }
                         break;
                     case "4":
+                        if (Auto_list.Count() != 0)
+                        {
+                            Auto_list.Clear();
+                            bool l675 = true;
+                            while (l675)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("All information has been successfully deleted");
+                                Console.Write("[ 1 ] Back\n|[1]<==:::| ");
+                                string k681 = Console.ReadLine();
+                                if (k681 == "1")
+                                {
+                                    l675 = false;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            bool l675 = true;
+                            while (l675)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Nothing to delete");
+                                Console.Write("[ 1 ] Back\n|[1]<==:::| ");
+                                string k681 = Console.ReadLine();
+                                if (k681 == "1")
+                                {
+                                    l675 = false;
+                                }
+                            }
+                            
+                        }
+                        
+                 
                         break;
                     case "5":
                         l354 = false;
